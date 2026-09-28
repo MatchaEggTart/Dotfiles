@@ -4,6 +4,10 @@
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# zsh 补全缓存文件位置（默认 ~/.zcompdump-<host>-<version>，挪到 ~/.cache 保持 home 干净）
+# 必须在 source $ZSH/oh-my-zsh.sh 之前设置才会生效；~/.cache/zsh 目录由安装脚本 mkdir 创建
+export ZSH_COMPDUMP="$HOME/.cache/zsh/compdump"
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -114,6 +118,12 @@ source $ZSH/oh-my-zsh.sh
 alias rm="rm -i"
 alias mv="mv -i"
 
+# eza（保留 GNU ls 上服务器用，ez 前缀 = eza）
+alias eza="eza --icons"
+alias ezal='eza -lh --git --icons --group-directories-first'
+alias ezall='eza -lah --git --icons --group-directories-first'
+alias ezat='eza -T --level=2 -h --git --icons --group-directories-first'
+
 # Vim
 # alias vim='gvim -v'
 # alias vim="vimx"
@@ -154,15 +164,25 @@ vterm_printf() {
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-# nvm
-# source /usr/share/nvm/init-nvm.sh
+# nvm（懒加载版）
+#   node/npm 常驻 PATH，只懒加载 nvm 函数本身，避免每次启动 source 整个 nvm.sh（约省 100ms）。
+#   node 版本动态取「已安装的最高版本」——只装 --lts 时即 default，换电脑 / 升级 LTS 无需改这里。
+#   若以后同时装多个版本并想固定用旧版本，需改用 current 软链方案。
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-# [ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
-# source /usr/share/nvm/nvm.sh
-# source /usr/share/nvm/bash_completion
-# source /usr/share/nvm/install-nvm-exec
+# node/npm 常驻 PATH：取已安装的最高版本
+if [[ -d "$NVM_DIR/versions/node" ]]; then
+  _nvm_ver=$(command ls -1 "$NVM_DIR/versions/node" | sort -V | tail -1)
+  [[ -n "$_nvm_ver" ]] && export PATH="$NVM_DIR/versions/node/$_nvm_ver/bin:$PATH"
+  unset _nvm_ver
+fi
+
+# 只懒加载 nvm 函数本身（node/npm 一直在 PATH 上，不影响其他程序找 node）
+nvm() {
+  unset -f nvm
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  nvm "$@"
+}
 
 # nvidia
 alias nvsmi="watch -n 1 nvidia-smi"
