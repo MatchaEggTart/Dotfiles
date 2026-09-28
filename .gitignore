@@ -1,0 +1,18 @@
+# ---- 编辑器临时 / 备份文件 ----
+*~
+*.swp
+*.swo
+*.swn
+.#*
+*.orig
+*.rej
+.netrwhist
+
+# ---- 操作系统 / 桌面环境 ----
+.DS_Store
+Thumbs.db
+.directory
+.Trash-*
+
+# ---- opencode 本地服务 token，运行时自动生成，不入库 ----
+matchaeggtart/config/opencode/service.json
