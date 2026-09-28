@@ -110,12 +110,19 @@
 
 ;; 块选择器
 (use-package multiple-cursors
+  :pin melpa
+  :init
+  ;; 所有命令默认对所有光标执行, 不再询问
+  ;; 放 :init 里: multiple-cursors 是延迟加载的, 放 :config 的话
+  ;; 在包加载前 mc/always-run-for-all 未定义, M-: 验证会 void-variable
+  (setq mc/always-run-for-all t)
+  ;; 清空之前误按 n 记入的 run-once 命令
+  (setq mc/cmds-to-run-once nil)
   :hook
   (multiple-cursors-mode-enabled . (lambda () (corfu-mode -1)))
   (multiple-cursors-mode-disabled . (lambda () (corfu-mode 1)))
   :config
   (global-unset-key (kbd "M-<down-mouse-1>"))
-  (setq mc/always-run-for-all 1)
   :bind
   ("C-S-c C-S-c" . 'mc/edit-lines)
   ("C->"         . 'mc/mark-next-like-this)

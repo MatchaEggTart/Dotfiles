@@ -24,6 +24,11 @@
 ;; 关闭提示音
 (setq ring-bell-function 'ignore)
 
+;; 关闭打开软链接每次询问
+(setq vc-follow-symlinks t)   ; 总是 follow，不再询问（推荐）
+;; (setq vc-follow-symlinks nil)  ; 从不 follow，保留软链接路径
+;; (setq vc-follow-symlinks 'ask) ; 默认，每次都问
+
 (provide 'init-basic)
 
 ;;; init-basic.el ends here
