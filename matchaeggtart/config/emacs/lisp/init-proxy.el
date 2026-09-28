@@ -8,7 +8,7 @@
        ("https" . "127.0.0.1:1080")
        ("no_proxy" . "^\\(localhost\\|127.0.0.1\\)")))
   (setq socks-server '("Default server" "127.0.0.1" 1080 5))
-  (message "代理已开启")
+  (message "PROXY ON ON ON")
   )
 
 (defun proxy_off ()
@@ -16,7 +16,7 @@
   (interactive)
   (setq url-proxy-services nil)
   (setq socks-server nil)
-  (message "代理已关闭")
+  (message "PROXY OFF OFF OFF")
   )
 
 (provide 'init-proxy)
