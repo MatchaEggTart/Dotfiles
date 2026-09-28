@@ -23,6 +23,7 @@
 (require 'init-edit)
 (require 'init-develop)
 (require 'init-org)
+(require 'init-markdown)
 (require 'init-web)
 (require 'init-eglot)
 (require 'init-treesit)
