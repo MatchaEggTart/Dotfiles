@@ -25,7 +25,9 @@ tramp
 custom.el
 history
 places
+places.eld
 recentf
+recentf.eld
 /tree-sitter/
 .mc-lists.el
 snippets
@@ -69,6 +71,7 @@ flycheck_*.el
 .projectile
 projects
 projectile-bookmarks.eld
+projectile-frecency.eld
 
 # directory configuration
 .dir-locals.el
