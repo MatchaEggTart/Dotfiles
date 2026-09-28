@@ -18,6 +18,10 @@
   :bind
   ("C-c t" . vterm)
   ;; vterm-copy-mode，默认使用 C-c C-t
+  ;; vterm 里关闭行号和当前行高亮，避免滚动卡顿
+  :hook (vterm-mode . (lambda ()
+                        (display-line-numbers-mode -1)
+                        (hl-line-mode -1)))
   :config
 
   )

@@ -33,6 +33,9 @@
     (setq corfu-auto-prefix 1)
     (setq corfu-on-exact-match nil)
     (setq text-mode-ispell-word-completion nil)
+    ;; sh-mode 文件补全时末尾不要自动加空格 (comint 后端的行为)
+    ;; 补全路径后可直接输入 / 进子目录; 想加空格做参数分隔时按 SPC
+    ;; (setq comint-completion-addsuffix nil)
     )
   )
 

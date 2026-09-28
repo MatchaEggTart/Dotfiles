@@ -75,8 +75,8 @@
   :ensure t
   :mode
   (
-	  ("\config\\'" . nginx-mode)
-	  ("\\.conf\\'" . nginx-mode)
+	  ("config\\'" . nginx-mode)      ; 匹配以 config 结尾的文件 (如 nginx.config)
+	  ("\\.conf\\'" . nginx-mode)     ; 匹配 .conf 结尾的文件
 	  )
   :config
   (setq nginx-indent-level 2)

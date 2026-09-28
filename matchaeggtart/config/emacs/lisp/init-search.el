@@ -14,22 +14,29 @@
   (vertico-mode)
   )
 
+;; Emacs minibuffer 全局配置
+(use-package emacs
+  :ensure nil
+  :custom
+  ;; 支持从 minibuffer 里再开 minibuffer
+  (enable-recursive-minibuffers t)
+  ;; 隐藏 M-x 里当前模式不适用的命令
+  (read-extended-command-predicate #'command-completion-default-include-p))
+
 ;; 保存搜索历史
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 ;; 记住指令跟文件，下次使用优先，不过 28好像默认开启了
 (use-package savehist
   :ensure nil
   :hook (after-init . savehist-mode)
-  :init (setq enable-recursive-minibuffers t ; Allow commands in minibuffers
- 	        history-length 1000
- 	        savehist-additional-variables '(
-                                           mark-ring
- 					                                 global-mark-ring
- 					                                 search-ring
- 					                                 regexp-search-ring
- 					                                 extended-command-history
-                                           )
- 	        savehist-autosave-interval 300)
+  :init
+  (setq history-length 1000
+        savehist-additional-variables '(mark-ring
+                                        global-mark-ring
+                                        search-ring
+                                        regexp-search-ring
+                                        extended-command-history)
+        savehist-autosave-interval 300)
   )
 
 ;; 模糊搜索
@@ -39,83 +46,24 @@
   ;; Configure a custom style dispatcher (see the Consult wiki)
   ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
   ;;       orderless-component-separator #'orderless-escapable-split-on-space)
+  ;; Emacs 31: partial-completion 表现像 substring, 让文件通配符更好用
+  (setq completion-pcm-leading-wildcard t)
   (setq completion-styles '(orderless basic)
- 	  completion-category-defaults nil
- 	  completion-category-overrides '((file (styles partial-completion))))
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles partial-completion))))
   )
 ;; 增强 minibuffer， 可以显示各种值跟其他数据
 ;; Enable rich annotations using the Marginalia package
 (use-package marginalia
-  ;; Either bind `marginalia-cycle' globally or only in the minibuffer
-  :bind (("M-A" . marginalia-cycle)
- 	        :map minibuffer-local-map
- 	        ("M-A" . marginalia-cycle))
-
+  ;; 只在 minibuffer 里绑定 (marginalia-cycle 只在 minibuffer 有意义)
+  :bind (:map minibuffer-local-map
+              ("M-A" . marginalia-cycle))
   ;; The :init configuration is always executed (Not lazy!)
   :init
-
   ;; Must be in the :init section of use-package such that the mode gets
   ;; enabled right away. Note that this forces loading the package.
   (marginalia-mode)
   )
-
-;; ;; Enable Vertico.
-;; (use-package vertico
-;;   ;; :custom
-;;   ;; (vertico-scroll-margin 0) ;; Different scroll margin
-;;   ;; (vertico-count 20) ;; Show more candidates
-;;   ;; (vertico-resize t) ;; Grow and shrink the Vertico minibuffer
-;;   ;; (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
-;;   :init
-;;   (vertico-mode))
-;;
-;; ;; Persist history over Emacs restarts. Vertico sorts by history position.
-;; (use-package savehist
-;;   :init
-;;   (savehist-mode))
-;;
-;; ;; Emacs minibuffer configurations.
-;; (use-package emacs
-;;   :custom
-;;   ;; Enable context menu. `vertico-multiform-mode' adds a menu in the minibuffer
-;;   ;; to switch display modes.
-;;   (context-menu-mode t)
-;;   ;; Support opening new minibuffers from inside existing minibuffers.
-;;   (enable-recursive-minibuffers t)
-;;   ;; Hide commands in M-x which do not work in the current mode.  Vertico
-;;   ;; commands are hidden in normal buffers. This setting is useful beyond
-;;   ;; Vertico.
-;;   (read-extended-command-predicate #'command-completion-default-include-p)
-;;   ;; Do not allow the cursor in the minibuffer prompt
-;;   (minibuffer-prompt-properties
-;;     '(read-only t cursor-intangible t face minibuffer-prompt)))
-;;
-;; ;; Optionally use the `orderless' completion style.
-;; (use-package orderless
-;;   :custom
-;;   ;; Configure a custom style dispatcher (see the Consult wiki)
-;;   ;; (orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch))
-;;   ;; (orderless-component-separator #'orderless-escapable-split-on-space)
-;;   (completion-styles '(orderless basic))
-;;   (completion-category-overrides '((file (styles partial-completion))))
-;;   (completion-category-defaults nil) ;; Disable defaults, use our settings
-;;   (completion-pcm-leading-wildcard t)) ;; Emacs 31: partial-completion behaves like substring
-;;
-;; ;; Enable rich annotations using the Marginalia package
-;; (use-package marginalia
-;;   ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
-;;   ;; available in the *Completions* buffer, add it to the
-;;   ;; `completion-list-mode-map'.
-;;   :bind (:map minibuffer-local-map
-;;          ("M-A" . marginalia-cycle))
-;;
-;;   ;; The :init section is always executed.
-;;   :init
-;;
-;;   ;; Marginalia must be activated in the :init section of use-package such that
-;;   ;; the mode gets enabled right away. Note that this forces loading the
-;;   ;; package.
-;;   (marginalia-mode))
 
 ;; C-s C-r 搜索增强
 ;; sudo dnf install ripgrep || sudo pacman -S ripgrep

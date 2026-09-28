@@ -164,23 +164,18 @@
 
 ;; 显示按键指令
 (use-package keycast
+  :demand t
   :after doom-modeline
-  :commands keycast-mode
-  :custom
-  ;; (keycast-mode-line-format "%k%c")
-  (keycast-mode-line-format "%k")
+  ;; doom-modeline 的 misc-info 段会显示 global-mode-string, 把 keycast 加进去即可显示在右侧
+  ;; (keycast 1.4.8 移除了旧的 global-mode-string 方式, 这里手动恢复 + 强制刷新)
   :config
-  (define-minor-mode keycast-mode
-    "Show current command and its key binding in the mode line."
-    :global t
-    (if keycast-mode
-      (progn
-        (add-hook 'pre-command-hook 'keycast--update t)
-        (add-to-list 'global-mode-string '("" keycast-mode-line " ")))
-      (remove-hook 'pre-command-hook 'keycast--update)
-      (setq global-mode-string (remove '("" keycast-mode-line " ") global-mode-string))))
-  :hook
-  (after-init . keycast-mode)
+  ;; 只显示按键本身, 不显示命令名和输入法
+  (setq keycast-mode-line-format "%k")
+  ;; 默认只在右下角窗口显示, 改成所有窗口都显示
+  (setq keycast-mode-line-window-predicate (lambda () t))
+  (add-to-list 'global-mode-string '("" keycast-mode-line " "))
+  (add-hook 'post-command-hook #'keycast--update)
+  (add-hook 'post-command-hook #'force-mode-line-update)
   )
 
 

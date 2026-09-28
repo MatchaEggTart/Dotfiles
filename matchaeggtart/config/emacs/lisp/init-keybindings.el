@@ -3,8 +3,7 @@
 ;;; Code:
 
 ;; y 和 n 取代 yes 和 no
-;; (defalias 'yes-or-no-p 'y-or-n-p)
-(fset 'yes-or-no-p 'y-or-n-p)
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; 查询三按键
 ;; (global-set-key (kbd "C-h C-f") 'view-emacs-FAQ)

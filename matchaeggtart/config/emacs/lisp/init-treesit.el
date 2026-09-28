@@ -14,9 +14,6 @@
 ;;   )
 
 
-;; 强制忽略所有 treesit 查询错误，防止高亮直接挂掉
-(setq treesit--suppress-native-compile-warnings t) ; 减少干扰
-
 (with-eval-after-load 'treesit
   ;; 1. 修正 treesit-query-capture 的 advice，去掉 message 提示，实现完全静音
   (advice-add 'treesit-query-capture :around
