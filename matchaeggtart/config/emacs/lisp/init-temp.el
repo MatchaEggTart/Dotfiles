@@ -1,3 +1,5 @@
+;;; init-temp.el --- temporary configurations -*- lexical-binding: t -*-
+
 ;; 打开配置文件
 (defun open-my-config ()
   (interactive)

@@ -1,3 +1,5 @@
+;;; init-dired.el --- the configurations for dired -*- lexical-binding: t -*-
+
 (use-package dired
   :ensure nil
   :bind (("C-x C-j" . dired-jump)

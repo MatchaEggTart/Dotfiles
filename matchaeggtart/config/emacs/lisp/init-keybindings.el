@@ -1,8 +1,6 @@
-;;; init-keybindings.el --- customize key
+;;; init-keybindings.el --- customize key -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
-
-;; -*- lexical-binding: t -*-
 
 ;; y 和 n 取代 yes 和 no
 ;; (defalias 'yes-or-no-p 'y-or-n-p)

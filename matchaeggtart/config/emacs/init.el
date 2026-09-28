@@ -1,8 +1,6 @@
-;;; init.el --- initial of the configurations
+;;; init.el --- initial of the configurations -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
-
-;; -*- lexical-binding: t -*-
 
 ;; 先设置加载的目标目录到 load-path 中
 (add-to-list 'load-path

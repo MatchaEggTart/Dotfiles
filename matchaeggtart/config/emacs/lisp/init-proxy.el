@@ -1,3 +1,5 @@
+;;; init-proxy.el --- proxy on/off settings -*- lexical-binding: t -*-
+
 (defun proxy_on ()
   "开启代理"
   (interactive)

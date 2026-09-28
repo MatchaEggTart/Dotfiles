@@ -1,8 +1,6 @@
-;;; init-treesit.el --- the configurations for treesit
+;;; init-treesit.el --- the configurations for treesit -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
-
-;; -*- lexical-binding: t -*-
 
 ;; (use-package tree-sitter
 ;;   :config

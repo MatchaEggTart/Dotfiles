@@ -29,10 +29,13 @@ function proxy_on() {
     export https_proxy=$http_proxy
     export HTTP_PROXY=$http_proxy
     export HTTPS_PROXY=$https_proxy
+    # 关键：必须排除本地回环，否则 OpenCode 等本地服务无法通信
+    export no_proxy="localhost,127.0.0.1,::1"
+    export NO_PROXY="localhost,127.0.0.1,::1"
     echo -e "\nPROXY is ON (HTTP via Privoxy)\n"
 }
 function proxy_off(){
-    unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY
+    unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY no_proxy NO_PROXY
     echo -e "\nPROXY is OFF\n"
 }
 function proxy_status() {

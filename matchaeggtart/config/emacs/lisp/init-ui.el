@@ -1,8 +1,6 @@
-;;; init-ui.el --- the configurations for ui
+;;; init-ui.el --- the configurations for ui -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
-
-;; -*- lexical-binding: t -*-
 
 (use-package emacs
   :ensure nil

@@ -1,8 +1,6 @@
-;;; init-system.el --- the configurations for system
+;;; init-system.el --- the configurations for system -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
-
-;; -*- lexical-binding: t -*-
 
 (defconst *is-mac* (eq system-type 'darwin) "判断操作系统是Mac")
 (defconst *is-linux* (eq system-type 'gnu/linux) "判断操作系统是Linux")

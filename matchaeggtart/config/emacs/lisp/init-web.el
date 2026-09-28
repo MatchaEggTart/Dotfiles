@@ -1,8 +1,6 @@
-;;; init-web.el --- the configurations for completion
+;;; init-web.el --- the configurations for completion -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
-
-;; -*- lexical-binding: t -*-
 
 ;; emmet
 ;; meta:vp ctrl-j

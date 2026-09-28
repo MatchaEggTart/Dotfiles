@@ -1,8 +1,6 @@
-;;; init-edit.el --- the configurations for editor
+;;; init-edit.el --- the configurations for editor -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
-
-;; -*- lexical-binding: t -*-
 
 ;; 括号补全
 (electric-pair-mode t)

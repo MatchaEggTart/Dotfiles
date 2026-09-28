@@ -1,8 +1,6 @@
-;;; Init-eglot.el --- the configurations for completion
+;;; Init-eglot.el --- the configurations for completion -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
-
-;; -*- lexical-binding: t -*-
 
 ;; Language Server (eglot - builtin since v29)
 (use-package eglot

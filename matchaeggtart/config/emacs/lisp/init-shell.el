@@ -1,8 +1,6 @@
-;;; init-shell.el --- the configurations for shell
+;;; init-shell.el --- the configurations for shell -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
-
-;; -*- lexical-binding: t -*-
 
 ;; Settings for exec-path-from-shell
 ;; fix the PATH environment variable issue

@@ -1,8 +1,6 @@
-;;; init-basic.el --- the configurations neednot packages
+;;; init-basic.el --- the configurations neednot packages -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
-
-;; -*- lexical-binding: t -*-
 
 ;; 编码问题(新)
 (prefer-coding-system 'utf-8)

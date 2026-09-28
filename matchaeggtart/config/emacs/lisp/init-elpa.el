@@ -1,8 +1,6 @@
-;;; init-elpa.el --- the configurations for install packages
+;;; init-elpa.el --- the configurations for install packages -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
-
-;; -*- lexical-binding: t -*-
 
 ;; 配置源
 ;; (message package-archives)

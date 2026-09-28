@@ -1,8 +1,6 @@
-;;; init-env.el --- the configurations for completion
+;;; init-env.el --- the configurations for completion -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
-
-;; -*- lexical-binding: t -*-
 
 ;; 寻找路径的工具
 ;; Settings for exec-path-from-shell

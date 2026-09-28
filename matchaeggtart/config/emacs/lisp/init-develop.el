@@ -1,8 +1,6 @@
-;;; init-develop.el --- the configurations for devloper
+;;; init-develop.el --- the configurations for devloper -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
-
-;; -*- lexical-binding: t -*-
 
 ;; 自动补全(新)
 ;; (use-package company

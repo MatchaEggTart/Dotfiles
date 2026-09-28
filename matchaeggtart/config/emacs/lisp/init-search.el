@@ -1,8 +1,6 @@
-;;; init-search.el --- the configurations for search, minibuffer, buffer
+;;; init-search.el --- the configurations for search, minibuffer, buffer -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
-
-;; -*- lexical-binding: t -*-
 
 ;; 搜索功能
 ;; Enable Vertico.
