@@ -51,6 +51,9 @@
     ;; 透明度
     ;; (set-frame-parameter nil 'alpha-background 90)
     ;; (add-to-list 'default-frame-alist '(alpha-background . 90))
+    
+    ;; 标题栏
+    ;; (add-to-list 'default-frame-alist '(undecorated . t))
 
     ;; 1. 到达窗口右边界时自动折行（只是“视觉”换行，不插 \n）
     ;; (global-visual-line-mode 1)          ; 对所有缓冲区生效
