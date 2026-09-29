@@ -9,5 +9,9 @@
   "attention": {
     "notifications": true,
     "sound": true
+  },
+  "keybinds": {
+    "input.submit": "ctrl+return",
+    "input.newline": "return,shift+return,ctrl+j"
   }
 }
