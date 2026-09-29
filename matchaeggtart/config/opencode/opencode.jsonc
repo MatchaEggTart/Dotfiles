@@ -1,4 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "deepseek/deepseek-flash"
+  "model": "deepseek/deepseek-flash",
+  "update": "disable"
 }
