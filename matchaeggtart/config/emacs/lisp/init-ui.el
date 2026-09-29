@@ -84,6 +84,10 @@
 (use-package dashboard
   :init
   (dashboard-setup-startup-hook)
+  ;; 启动后光标跳到最近文件列表 (而不是停在左上角)
+  ;; 注意: 要用 dashboard-after-initialize-hook, 因为 dashboard 在 emacs-startup-hook
+  ;; 里会先 goto-char (point-min) 把光标移到左上角, 之后才 run-hooks dashboard-after-initialize-hook
+  :hook (dashboard-after-initialize . dashboard-jump-to-recents)
   :config
   ;; (setq dashboard-banner-logo-title "Welcome to Emacs!") ;; 个性签名，随读者喜好设置
   ;; (setq dashboard-startup-banner nil)       		;; 不显示 Logo
