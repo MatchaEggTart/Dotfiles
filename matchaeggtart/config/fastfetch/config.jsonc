@@ -8,7 +8,8 @@
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
   "logo": {
-    "source": "$HOME/.config/fastfetch/ascii/arch.ascii",
+    "type": "file", // 明确指定为文本 + $n 颜色替换；不写的话会走图片(chafa)探测，去问终端尺寸并等 1s 超时
+    "source": "$HOME/.config/fastfetch/ascii/communist",
     "padding": {
       "top": 2,
       "right": 6
@@ -45,24 +46,16 @@
       "type": "cpuusage",
       "key": " ",
       "format": "({avg})",
-      "temp": true,
+      "waitTime": 50, // 采样间隔 ms，默认 200；越小出来越快
       "keyColor": "33",
     },
     {
-      "type": "gpu",
+      "type": "command",
       "key": "󰢮 ",
-      // "format": "{dedicated-used} / {dedicated-total} ({dedicated-percentage-num}) - {temperature}",
-      "format": "({dedicated-percentage-num}) - {temperature}",
-      "driverSpecific": true,
-      "detectionMethod": "pci",
+      // 独显 runtime-suspended 时不叫醒它（nvmlInit 把 D3cold 拉起来要 2.5s+）；只在它已经醒着时才读 NVML
+      // 想一直只显示型号的话：改回 "type": "gpu", "format": "{name}"
+      "text": "v=$(grep -l 0x10de /sys/bus/pci/devices/*/vendor 2>/dev/null | head -n1); s=$(cat \"${v%/vendor}/power/runtime_status\" 2>/dev/null); out=; [ \"$s\" = active ] && out=$(nvidia-smi --query-gpu=utilization.gpu,temperature.gpu --format=csv,noheader,nounits 2>/dev/null | awk -F', *' 'NF==2{printf \"(%s%%) - %s.0°C\", $1, $2}'); echo \"${out:---}\"",
       "keyColor": "33",
-      "temp": true,
-      "hideType": "Integrated",
-      "percent": {
-        "green": 50,
-        "yellow": 80,
-        "type": 0
-      }
     },
     {
       "type": "memory",

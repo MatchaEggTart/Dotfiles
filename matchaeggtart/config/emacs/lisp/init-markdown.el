@@ -27,7 +27,7 @@
 ;;;   - C-c C-i             插入图片
 ;;;
 ;;;   [预览]
-;;;   - C-c C-c l           live preview: Emacs 内分屏实时预览 (eww 渲染)
+;;;   - C-c C-c l           live preview: Emacs 内分屏预览 (eww 渲染, 保存时刷新)
 ;;;   - C-c C-c p           markdown-preview-mode: 浏览器实时预览 (再按一次关闭)
 ;;;
 ;;;   [目录]
@@ -61,6 +61,11 @@
   ;; Markdown 转 HTML 的转换器 (预览/导出用, 需装 pandoc)
   ;; pandoc 功能最全, 支持表格/代码块/GFM 等扩展语法
   (setq markdown-command "pandoc")
+
+  ;; 给导出的 HTML 加 CSS, 让 eww 预览更好看
+  ;; 注意: eww 只支持部分 CSS 属性, 复杂布局不生效, 效果有限
+  (setq markdown-css-paths
+        '("https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown.css"))
 
   ;; live preview (C-c C-c l) 分屏方向: 'right 右边 / 'below 下方
   (setq markdown-split-window-direction 'right)
