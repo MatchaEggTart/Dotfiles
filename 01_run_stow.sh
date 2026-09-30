@@ -17,6 +17,7 @@ rm -rf $HOME/.config/oh-my-posh
 rm -rf $HOME/.config/cava
 rm -rf $HOME/.config/pip
 rm -rf $HOME/.config/opencode
+rm -rf $HOME/.config/searxng
 
 rm -rf $HOME/.npmrc
 

@@ -1,0 +1,29 @@
+# SearXNG 用户配置。只在默认配置的基础上做最小覆盖，其余全部继承默认值。
+use_default_settings:
+  engines:
+    remove:
+      # 这两个引擎依赖 Tor，本机没跑 Tor，留着只会刷日志报错
+      - ahmia
+      - torch
+
+general:
+  instance_name: "SearXNG (local)"
+
+search:
+  safe_search: 0          # 0=不过滤 1=中等 2=严格；技术查询用 0
+  autocomplete: "duckduckgo"
+  formats:
+    - html                # 给人看的网页界面
+    - json                # Cherry Studio 和 MCP 都依赖它（默认没有！）
+
+server:
+  base_url: "http://127.0.0.1:8080/"
+  limiter: false          # 只监听回环地址，单机用不需要限流器
+  image_proxy: false
+  public_instance: false  # 不要开：那是给公开实例防滥用的
+
+# 默认配置里 google 引擎是 `disabled: true`。
+# 指定同一 name 时，SearXNG 会按 name 合并覆盖，所以这里只写需要改的字段。
+engines:
+  - name: google
+    disabled: false

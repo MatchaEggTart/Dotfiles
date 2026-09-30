@@ -1,5 +1,19 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "model": "deepseek/deepseek-flash",
-  "update": "disable"
+  "update": "disable",
+  "mcp": {
+    "servers": {
+      "searxng": {
+        "type": "local",
+        "command": ["npx", "-y", "mcp-searxng"],
+        "environment": {
+          "SEARXNG_URL": "http://127.0.0.1:8080"
+        },
+        "timeout": {
+          "startup": 60000
+        }
+      }
+    }
+  }
 }
