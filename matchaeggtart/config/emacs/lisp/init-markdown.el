@@ -60,7 +60,7 @@
   :config
   ;; Markdown 转 HTML 的转换器 (预览/导出用, 需装 pandoc)
   ;; pandoc 功能最全, 支持表格/代码块/GFM 等扩展语法
-  (setq markdown-command "pandoc")
+  (setq markdown-command "markdown")
 
   ;; 给导出的 HTML 加 CSS, 让 eww 预览更好看
   ;; 注意: eww 只支持部分 CSS 属性, 复杂布局不生效, 效果有限

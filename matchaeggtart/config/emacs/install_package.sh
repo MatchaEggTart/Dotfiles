@@ -1,2 +1,2 @@
 # for consult
-sudo pacman -S ripgrep pandoc
+sudo pacman -S ripgrep #pandoc
