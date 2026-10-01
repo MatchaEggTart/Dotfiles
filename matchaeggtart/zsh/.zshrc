@@ -122,7 +122,7 @@ alias mv="mv -i"
 alias eza="eza --icons"
 alias ezal='eza -lh --git --icons --group-directories-first'
 alias ezall='eza -lah --git --icons --group-directories-first'
-alias ezat='eza -T --level=2 -h --git --icons --group-directories-first'
+alias ezat='eza -T --level=2 -lh --git --icons --group-directories-first'
 
 # Vim
 # alias vim='gvim -v'
