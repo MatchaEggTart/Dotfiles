@@ -54,6 +54,15 @@
 	     ;; pipx install python-lsp-server
 	     (python 			. ("https://github.com/tree-sitter/tree-sitter-python"))
 	     (lua         . ("https://github.com/MunifTanjim/tree-sitter-lua"))
+
+	     ;; markdown-ts-mode 需要 markdown + markdown-inline 两个语法库。
+	     ;; 平时由系统包 tree-sitter-markdown 提供 (直接装在 /usr/lib),
+	     ;; 这里补上配方只是为了 M-x markdown-ts-mode-install-parsers
+	     ;; 有东西可编译; 两个 grammar 在同一个仓库的不同 src 目录里。
+	     ;; 上游 markdown-ts-mode 钉了具体 commit, 这里沿用本列表其他
+	     ;; 条目的写法用默认分支; 哪天 HEAD 不兼容再改成钉版本。
+	     (markdown        . ("https://github.com/tree-sitter-grammars/tree-sitter-markdown" nil "tree-sitter-markdown/src"))
+	     (markdown-inline . ("https://github.com/tree-sitter-grammars/tree-sitter-markdown" nil "tree-sitter-markdown-inline/src"))
 	     ))
   :mode
   (
