@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: org export header (title/date/author/email)
+# key: hdr
+# --
+#+title: $1
+#+date: <`(format-time-string "%Y-%m-%d %a")`>
+#+author: MatchaEggTart
+#+email: matchaeggtart@hotmail.com
+$0
