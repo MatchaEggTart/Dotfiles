@@ -75,6 +75,20 @@
   ;; org-startup-indented: t 启用缩进模式，子标题自动缩进
   (setq org-startup-indented t)
 
+  ;; 让缩进 / 对间距敏感的 face 强制走等宽字体。
+  ;; 原因: org-indent-mode 的"缩进"是一串不可见的行首字符 (org-indent face),
+  ;;       它默认继承 default; 开了 variable-pitch-mode 后 default 变成比例字体,
+  ;;       缩进前缀就会变得又窄又乱, 正文/代码块看起来比标题靠左、对不齐。
+  ;; 只设 :family (不碰 :inherit/:foreground), 所以主题配色不受影响。
+  ;; 注意: org-indent 这个 face 定义在 org-indent.el 里, 得先 require 出来。
+  (require 'org-indent)
+  (let ((mono (face-attribute 'fixed-pitch :family)))
+    (when (stringp mono)
+      (dolist (f '(org-indent org-hide
+                    org-block org-block-begin-line org-block-end-line
+                    org-code org-verbatim org-table org-meta-line))
+        (set-face-attribute f nil :family mono))))
+
   ;; org-startup-with-inline-images: t 启动时自动显示内联图片
   (setq org-startup-with-inline-images t)
 
@@ -109,7 +123,7 @@
   ;; GTD 日程管理配置
   ;; =========================================================================
   ;; org-agenda-files: 日程文件列表，支持多个文件
-  (setq org-agenda-files '("~/Workspace/Org/GTD/gtd.org"))
+  (setq org-agenda-files '("~/Workspace/Notes/Org/GTD/gtd.org"))
 
   ;; org-agenda-span: 默认显示的时间跨度，'day 是当天
   (setq org-agenda-span 'day)
@@ -196,12 +210,10 @@
   :after org
   :hook (org-mode . org-modern-mode)
   :config
-  ;; org-modern-hide-stars: nil 不隐藏星号（配合 org-superstar 美化）
-  ;; org-modern-indent: t 启用缩进
+  ;; org-modern-hide-stars: nil 不隐藏星号
   ;; org-modern-table: nil 禁用内置表格美化（由 valign 处理）
   ;; org-modern-block-fringe: nil 禁用代码块边框
   (setq org-modern-hide-stars nil
-    org-modern-indent t
     org-modern-table nil
     org-modern-block-fringe nil)
 
@@ -218,29 +230,13 @@
   )
 
 ;; ============================================================================
-;; org-superstar: 标题符号美化
+;; org-superstar: 已移除
 ;; ============================================================================
-;; 将标题前的星号替换为更美观的符号
-(use-package org-superstar
-  :after org
-  :hook (org-mode . org-superstar-mode)
-  :config
-  ;; org-superstar-headings: 定义每个级别标题的符号
-  ;;   ?* 表示原始星号，?\u2022 表示 bullet point (•)
-  ;;   ?- 表示连字符，?\u2013 表示 en dash (–)
-  ;;   ?+ 表示加号，?\u2726 表示 star (✦)
-  (setq org-superstar-headings
-    '((?* . ?•)    ; * 标题 -> • 标题（一级）
-       (?- . ?–)    ; - 标题 -> – 标题（二级）
-       (?+ . ?✦))   ; + 标题 -> ✦ 标题（三级）
-
-    ;; org-superstar-special-headers: nil 不特殊处理特定标题
-    org-superstar-special-headers nil)
-
-  ;; org-superstar-leading: 前导字符设为空格
-  ;;   配合 org-hide-leading-stars 使用，可以让标题看起来更干净
-  (setq org-superstar-leading ?\s)
-  )
+;; org-modern 官方说明它是 org-superstar 的完整替代品, 两者同时开只会在同一段
+;; 文本属性上互相覆盖 (org-modern 用 display, org-superstar 用 composition,
+;; display 会赢), 实际显示的始终是 org-modern 的折叠指示符。
+;; 所以标题符号统一交给 org-modern 控制 (见上面 org-modern-star 等选项),
+;; 这里不再启用 org-superstar。包本身可以留着, 也可以 package-delete 卸掉。
 
 ;; ============================================================================
 ;; valign: 表格对齐
@@ -311,7 +307,7 @@
 
   :config
   ;; org-roam-directory: 笔记存放的根目录
-  (setq org-roam-directory (file-truename "~/Workspace/Org/org-files/"))
+  (setq org-roam-directory (file-truename "~/Workspace/Notes/Org/org-files/"))
 
   ;; org-roam-node-display-template: 节点列表中的显示格式
   ;;   ${title:*} 显示标题

@@ -6,6 +6,7 @@
     { "action": "shell", "resource": "*", "effect": "ask" },
     { "action": "edit", "resource": "*", "effect": "ask" },
     { "action": "external_directory", "resource": "*", "effect": "ask" },
+    { "action": "external_directory", "resource": "$HOME/.config/opencode/skills/*", "effect": "allow" },
     { "action": "read", "resource": "*.env", "effect": "ask" },
     { "action": "read", "resource": "*.env.*", "effect": "ask" },
     { "action": "read", "resource": "*secret*", "effect": "ask" },

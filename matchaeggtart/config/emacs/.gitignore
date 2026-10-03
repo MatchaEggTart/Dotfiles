@@ -30,7 +30,7 @@ recentf
 recentf.eld
 /tree-sitter/
 .mc-lists.el
-snippets
+# snippets   <- 原模板忽略此项; 取消忽略, 让自定义 snippet 随 dotfiles 进仓库
 transient
 .cache
 .lsp-session
