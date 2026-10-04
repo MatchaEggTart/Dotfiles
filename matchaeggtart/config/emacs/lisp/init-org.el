@@ -99,6 +99,14 @@
   ;; org-ellipsis: 折叠时显示的省略号，▾ 是实心小三角
   (setq org-ellipsis " ▾")
 
+  ;; org-catch-invisible-edits: 'show-and-error 在折叠/不可见处编辑时先报错,
+  ;;   避免误删被折叠掉的文字 (比默认的 nil 安全很多)
+  (setq org-catch-invisible-edits 'show-and-error)
+
+  ;; org-special-ctrl-a/e: t 让 C-a / C-e 在标题行更聪明
+  ;;   C-a 第一次跳到标题文字开头, 再按一次才到行首; C-e 同理
+  (setq org-special-ctrl-a/e t)
+
   ;; =========================================================================
   ;; TODO 关键字配置
   ;; =========================================================================
@@ -144,11 +152,13 @@
   ;; 代码块配置
   ;; =========================================================================
   ;; org-src-fontify-natively: t 代码块语法高亮
-  ;; org-src-tab-acts-natively: t 代码块中 Tab 正常工作
-  ;; org-edit-src-content-indentation: 2 代码块内容缩进空格数
+  ;; org-src-tab-acts-natively: t 代码块中 Tab 交给语言主模式缩进
+  ;; org-src-content-indentation: 0 代码块内容相对 #+begin 不再额外缩进
+  ;;   值为 2 时, 在块里按 TAB 会把每行推右两格 ("缩进两格"的来源);
+  ;;   旧名 org-edit-src-content-indentation 自 Org 9.8 起已废弃, 这里用新名
   (setq org-src-fontify-natively t
     org-src-tab-acts-natively t
-    org-edit-src-content-indentation 2)
+    org-src-content-indentation 0)
 
   ;; =========================================================================
   ;; 导出配置
@@ -227,6 +237,12 @@
   ;; org-modern-table-vertical/horizontal: 表格边框样式
   (setq org-modern-table-vertical 2
     org-modern-table-horizontal 1)
+
+  ;; org-modern-symbol: 标题上换的折叠符号 (▽ / ⯆ 等) 也指定等宽字体。
+  ;;   否则在 variable-pitch-mode 下它的宽度不在 org-indent 的字符网格上,
+  ;;   同级标题的文字起点会漂 (org-modern 官方也建议显式指定这个 face)。
+  (set-face-attribute 'org-modern-symbol nil
+                      :family (face-attribute 'fixed-pitch :family))
   )
 
 ;; ============================================================================

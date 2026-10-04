@@ -89,6 +89,19 @@
     :override t)
   :config
   (global-set-key (kbd "<f5>") 'quickrun)
+
+  ;; 让 quickrun 的输出固定出现在底部一条 side window, 不再"看心情"乱跳。
+  ;; quickrun 内部只调 pop-to-buffer, 窗口由 display-buffer 决定;
+  ;; display-buffer-alist 是通用的"把某个 buffer 钉到指定位置"机制。
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*quickrun\\*\\'"
+                 (display-buffer-in-side-window)
+                 (side . bottom)
+                 (slot . 0)
+                 (window-height . 0.30)))
+
+  ;; 跑完不把光标从代码窗口抢走 (想跳过去就删掉这行)
+  (setq quickrun-focus-p nil)
   )
 
 ;; format-all-the-code

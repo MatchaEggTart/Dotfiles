@@ -5,8 +5,10 @@
   "permissions": [
     { "action": "shell", "resource": "*", "effect": "ask" },
     { "action": "edit", "resource": "*", "effect": "ask" },
+    { "action": "edit", "resource": "/tmp/opencode/*", "effect": "allow" },
     { "action": "external_directory", "resource": "*", "effect": "ask" },
     { "action": "external_directory", "resource": "$HOME/.config/opencode/skills/*", "effect": "allow" },
+    { "action": "external_directory", "resource": "/tmp/opencode/*", "effect": "allow" },
     { "action": "read", "resource": "*.env", "effect": "ask" },
     { "action": "read", "resource": "*.env.*", "effect": "ask" },
     { "action": "read", "resource": "*secret*", "effect": "ask" },
