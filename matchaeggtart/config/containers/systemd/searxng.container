@@ -1,0 +1,22 @@
+[Quadlet]
+DefaultDependencies=false
+
+[Unit]
+Description=SearXNG metasearch engine (rootless Podman)
+
+[Container]
+Image=docker.io/searxng/searxng:latest
+ContainerName=searxng
+Network=host
+Environment=GRANIAN_HOST=127.0.0.1
+Environment=GRANIAN_PORT=8080
+Volume=%h/.config/searxng:/etc/searxng:Z
+Volume=searxng-cache:/var/cache/searxng:Z
+EnvironmentFile=%h/.config/searxng/searxng.env
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target

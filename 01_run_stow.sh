@@ -18,6 +18,7 @@ rm -rf $HOME/.config/cava
 rm -rf $HOME/.config/pip
 rm -rf $HOME/.config/opencode
 rm -rf $HOME/.config/searxng
+rm -rf $HOME/.config/containers/systemd   # Quadlet 单元（只清这一层，别动 $HOME/.config/containers 里 podman 自己的 conf）
 
 rm -rf $HOME/.npmrc
 

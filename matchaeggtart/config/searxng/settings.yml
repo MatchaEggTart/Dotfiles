@@ -22,8 +22,13 @@ server:
   image_proxy: false
   public_instance: false  # 不要开：那是给公开实例防滥用的
 
-# 默认配置里 google 引擎是 `disabled: true`。
+# 默认配置里 `google` 和 `bing` 都是 `disabled: true`。
 # 指定同一 name 时，SearXNG 会按 name 合并覆盖，所以这里只写需要改的字段。
 engines:
   - name: google
+    disabled: false
+  # 本机实测（2026-10）：google 的 /wml/search 端点被 Google 封了（恒 403，与出口无关）；
+  # brave/duckduckgo/qwant 是间歇性机器人判定。bing 是稳定可用的第二来源 ——
+  # 少了它，普通搜索就只剩 google cse 一个来源（见附录「哪些引擎真的出得来结果」）。
+  - name: bing
     disabled: false
