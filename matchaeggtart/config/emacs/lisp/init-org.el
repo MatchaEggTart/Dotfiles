@@ -96,6 +96,14 @@
   ;;   例如: \alpha 显示为 α, \rightarrow 显示为 →
   (setq org-pretty-entities t)
 
+  ;; org-pretty-entities-include-sub-superscripts: nil 不让 pretty-entities 接管上下标
+  ;;   默认 t 时, _ / ^ 后面的内容会被缩小下移成下标 (a_2 显示成 a₂),
+  ;;   因为 org-match-substring-regexp 里字母和数字都算, a_b 一样会中招。
+  ;;   关掉它: 实体美化 (\alpha -> α) 保留, 但 a_2 原样显示, 不再下沉。
+  ;;   注意只管显示; 导出仍看 org-export-with-sub-superscripts (默认 t),
+  ;;   要花括号语义 (_ 必须写成 _{...}) 时另设成 '{}。
+  (setq org-pretty-entities-include-sub-superscripts nil)
+
   ;; org-ellipsis: 折叠时显示的省略号，▾ 是实心小三角
   (setq org-ellipsis " ▾")
 
