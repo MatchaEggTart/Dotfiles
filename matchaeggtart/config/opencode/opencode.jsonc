@@ -4,6 +4,39 @@
   "update": "disable",
   "permissions": [
     { "action": "shell", "resource": "*", "effect": "ask" },
+
+    // 危险命令：硬拒绝
+    { "action": "shell", "resource": "sudo *", "effect": "deny" },
+    { "action": "shell", "resource": "git push *", "effect": "deny" },
+    { "action": "shell", "resource": "mkfs*", "effect": "deny" },
+    { "action": "shell", "resource": "dd *", "effect": "deny" },
+    { "action": "shell", "resource": "shutdown *", "effect": "deny" },
+    { "action": "shell", "resource": "reboot *", "effect": "deny" },
+
+    // 只读导航/查询：免问。不放 cat/head/tail/rg/fd，避免绕过 read 的 secrets 规则
+    { "action": "shell", "resource": "ls *", "effect": "allow" },
+    { "action": "shell", "resource": "eza *", "effect": "allow" },
+    { "action": "shell", "resource": "tree *", "effect": "allow" },
+    { "action": "shell", "resource": "stat *", "effect": "allow" },
+    { "action": "shell", "resource": "file *", "effect": "allow" },
+    { "action": "shell", "resource": "wc *", "effect": "allow" },
+    { "action": "shell", "resource": "pwd", "effect": "allow" },
+    { "action": "shell", "resource": "which *", "effect": "allow" },
+    { "action": "shell", "resource": "rg --files *", "effect": "allow" },
+    { "action": "shell", "resource": "git status *", "effect": "allow" },
+    { "action": "shell", "resource": "git diff *", "effect": "allow" },
+    { "action": "shell", "resource": "git log *", "effect": "allow" },
+    { "action": "shell", "resource": "git show *", "effect": "allow" },
+    { "action": "shell", "resource": "git branch *", "effect": "allow" },
+    { "action": "shell", "resource": "pacman -Q*", "effect": "allow" },
+    { "action": "shell", "resource": "paru -Q*", "effect": "allow" },
+    { "action": "shell", "resource": "systemctl status *", "effect": "allow" },
+    { "action": "shell", "resource": "systemctl is-active *", "effect": "allow" },
+
+    // 上面几条的写文件/执行后门：仍然询问
+    { "action": "shell", "resource": "git *--output*", "effect": "ask" },
+    { "action": "shell", "resource": "rg *--pre*", "effect": "ask" },
+
     { "action": "edit", "resource": "*", "effect": "ask" },
     { "action": "edit", "resource": "/tmp/opencode/*", "effect": "allow" },
     { "action": "external_directory", "resource": "*", "effect": "ask" },

@@ -22,6 +22,13 @@ server:
   image_proxy: false
   public_instance: false  # 不要开：那是给公开实例防滥用的
 
+outgoing:
+  # 本机实测（2026-10）：出口是 VPN，TLS 握手 1.2–6.5s、单请求总耗时 1.9–8.2s，
+  # 而默认 request_timeout 只有 3.0s → bing / wikipedia / wikidata 常态 Timeout
+  # （日志是 curl_cffi Timeout，不是 403/429）。放宽到 6.0s，总上限放到 15s。
+  request_timeout: 6.0
+  max_request_timeout: 15.0
+
 # 默认配置里 `google` 和 `bing` 都是 `disabled: true`。
 # 指定同一 name 时，SearXNG 会按 name 合并覆盖，所以这里只写需要改的字段。
 engines:
@@ -32,3 +39,9 @@ engines:
   # 少了它，普通搜索就只剩 google cse 一个来源（见附录「哪些引擎真的出得来结果」）。
   - name: bing
     disabled: false
+  # wikipedia 引擎走的是 REST v1 summary 端点（/api/rest_v1/page/summary/…），
+  # 不是网页 /wiki/、也不是 /w/api.php —— 三条路配额不同，只有这条常态 429。
+  # 而它只产出摘要信息框、不进搜索结果列表；关掉后结果数不变（bing + google cse）。
+  # 没有删除任何默认定义，想恢复就把 disabled 改回 false。
+  - name: wikipedia
+    disabled: true
