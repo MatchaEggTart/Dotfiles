@@ -40,7 +40,9 @@
     { "action": "edit", "resource": "*", "effect": "ask" },
     { "action": "edit", "resource": "/tmp/opencode/*", "effect": "allow" },
     { "action": "external_directory", "resource": "*", "effect": "ask" },
-    { "action": "external_directory", "resource": "$HOME/.config/opencode/skills/*", "effect": "allow" },
+    // 自己的 skill 库与 opencode 配置目录：读不打扰（写仍受 edit: ask 管）
+    { "action": "external_directory", "resource": "$HOME/.config/opencode/*", "effect": "allow" },
+    { "action": "external_directory", "resource": "$HOME/.agents/*", "effect": "allow" },
     { "action": "external_directory", "resource": "/tmp/opencode/*", "effect": "allow" },
     { "action": "read", "resource": "*.env", "effect": "ask" },
     { "action": "read", "resource": "*.env.*", "effect": "ask" },
